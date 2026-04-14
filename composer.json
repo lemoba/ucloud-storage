@@ -1,0 +1,32 @@
+{
+    "name": "lemoba/ucloud-storage",
+    "description": "UCloud Object Storage SDK for Laravel, supporting Swoole environments.",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "cyrus",
+            "email": "ranen1024@gmail.com"
+        }
+    ],
+    "require": {
+        "php": ">=8.0.0",
+        "illuminate/support": "*",
+        "illuminate/http": "*"
+    },
+    "autoload": {
+        "psr-4": {
+            "UCloud\\Storage\\": "src/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "UCloud\\Storage\\UCloudServiceProvider"
+            ],
+            "aliases": {
+                "UCloud": "UCloud\\Storage\\Facades\\UCloud"
+            }
+        }
+    }
+}
