@@ -13,31 +13,19 @@
 
 ## 🛠 安装与配置
 
-由于目前尚未发布在 Packagist 公开环境，如果你要在同一个机器上的其他主项目中引用它，请使用 Composer 的本地路径机制：
+你可以通过 Composer 轻松在主项目里安装这个扩展包：
 
-1. 在你的**业务主项目**里的 `composer.json` 中配置本地仓库位置：
-   ```json
-   "repositories": [
-       {
-           "type": "path",
-           "url": "/Users/ranen/workspace/php/ucloud"
-       }
-   ],
-   "require": {
-       "ucloud/storage-laravel": "*"
-   }
-   ```
-2. 运行安装命令将包链接进去：
+1. 运行安装命令将包引入：
    ```bash
-   composer update ucloud/storage-laravel
+   composer require lemoba/ucloud-storage
    ```
 
-3. 导出包的配置文件到你的 `config` 目录 (可选):
+2. 导出包的配置文件到你的 `config` 目录 (可选):
    ```bash
    php artisan vendor:publish --tag=ucloud-config
    ```
 
-4. 在主项目的 `.env` 中加入必须要配置的环境变量信息：
+3. 在主项目的 `.env` 中加入必须要配置的环境变量信息：
    ```env
    # 控制台提供的公钥
    UCLOUD_PUBLIC_KEY=your_public_key
