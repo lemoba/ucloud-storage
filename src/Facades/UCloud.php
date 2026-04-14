@@ -16,8 +16,10 @@ use Illuminate\Support\Facades\Facade;
  * @method static mixed head(string $key, string $bucket = null)
  * @method static mixed appendFile(string $key, string $file, int $position, string $bucket = null)
  * @method static mixed listObjects(string $pathPrefix = '', string $marker = '', int $count = 20, string $delimiter = '', string $bucket = null)
+ * @method static mixed listObjects(string $pathPrefix = '', string $marker = '', int $count = 20, string $delimiter = '', string $bucket = null)
  * @method static string makePublicUrl(string $key, string $bucket = null)
  * @method static string makePrivateUrl(string $key, int $expires = 0, string $bucket = null)
+ * @method static array refreshCdnUrls(array $urls)
  *
  * @see \UCloud\Storage\UCloudClient
  */

@@ -150,6 +150,16 @@ $headers = UCloud::head('info.jpg');
 // $headers 将包含一个包含 Content-Length 和 ETag 信息的数组。
 ```
 
+### 刷新 CDN 全网边缘节点缓存
+如果在你的配置文件中设置了 `UCLOUD_DOMAIN` 而且发生了同名覆盖，可以通过这个功能主动通知遍布全球的 CDN 节点刷新旧缓存。
+```php
+$urls = [
+    'https://cdn.example.com/images/demo.jpg'
+];
+// 支持一次传入最多 30 个 URL 进行刷新
+UCloud::refreshCdnUrls($urls);
+```
+
 ### 按前缀读取云端列表目录
 ```php
 // 获取 20 个根目录下 `pics/` 开头的文件或目录

@@ -362,4 +362,44 @@ class UCloudClient
         
         return $url;
     }
+
+    /**
+     * Refresh UCloud CDN Edge Cache for given URLs
+     * 
+     * @param array $urls List of URLs to refresh
+     * @return array Response from UCloud API
+     */
+    public function refreshCdnUrls(array $urls)
+    {
+        $params = [
+            'Action' => 'RefreshNewUcdnDomainCache',
+            'Type' => 'file',
+            'PublicKey' => $this->publicKey,
+        ];
+
+        foreach (array_values($urls) as $idx => $url) {
+            $params["UrlList.{$idx}"] = $url;
+        }
+
+        // OpenAPI Signature logic
+        ksort($params);
+        $str = '';
+        foreach ($params as $k => $v) {
+            $str .= $k . $v;
+        }
+        $str .= $this->privateKey;
+        $params['Signature'] = sha1($str);
+
+        // UCloud Global API Endpoint
+        $response = Http::timeout($this->timeout)->withoutVerifying()
+            ->post('https://api.ucloud.cn/', $params);
+
+        if (!$response->successful() || $response->json('RetCode') !== 0) {
+            $errRet = $response->json('RetCode') ?? $response->status();
+            $errMsg = $response->json('Message') ?? $response->body();
+            throw new UCloudException($errMsg ?: 'CDN Refresh Failed', $response->status(), $errRet);
+        }
+
+        return $response->json();
+    }
 }
